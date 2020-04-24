@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">Machine Learning</string>
+    <string name="title_activity_menu">Menu</string>
+    <string name="title_home">Home</string>
+    <string name="title_notifications">Notifications</string>
+    <string name="write_a_message">Write a message</string>
+</resources>
