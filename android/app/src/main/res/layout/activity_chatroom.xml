@@ -31,7 +31,6 @@
         android:ems="10"
         android:fontFamily="@font/mont_extralight"
         android:hint="send message.."
-        android:inputType="text"
         android:paddingStart="15dp"
         android:paddingTop="3dp"
         android:paddingEnd="10dp"
@@ -40,7 +39,11 @@
         android:textSize="17dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/send"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        android:inputType="text|textUri"
+        android:imeOptions="actionGo"
+        android:imeActionId="1"
+        android:maxLines="1" />
 
     <ImageView
         android:id="@+id/send"

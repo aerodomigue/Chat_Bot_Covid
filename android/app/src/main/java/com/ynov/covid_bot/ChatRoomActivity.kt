@@ -3,6 +3,8 @@ package com.ynov.covid_bot
 import android.os.Bundle
 import android.util.Log
 import android.view.View
+import android.view.inputmethod.EditorInfo
+import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.gson.Gson
@@ -35,12 +37,15 @@ class ChatRoomActivity : AppCompatActivity(), View.OnClickListener {
         setContentView(R.layout.activity_chatroom)
 
 
+
         send.setOnClickListener(this)
         leave.setOnClickListener(this)
 
         //Get the nickname and roomname from entrance activity.
         try {
             userName = intent.getStringExtra("userName")!!
+            partnerName.text = userName
+
             roomName = intent.getStringExtra("roomName")!!
         } catch (e: Exception) {
             e.printStackTrace()
@@ -55,6 +60,7 @@ class ChatRoomActivity : AppCompatActivity(), View.OnClickListener {
         val layoutManager = LinearLayoutManager(this)
         recyclerView.layoutManager = layoutManager
 
+
         //Let's connect to our Chat room! :D
         try {
             mSocket = IO.socket("http://192.168.10.28:3000")
@@ -63,6 +69,15 @@ class ChatRoomActivity : AppCompatActivity(), View.OnClickListener {
         } catch (e: Exception) {
             e.printStackTrace()
             Log.d("fail", "Failed to connect")
+        }
+
+        editText.setOnEditorActionListener { v, actionId, event ->
+            val handled = false
+            if (actionId == EditorInfo.IME_ACTION_GO) {
+                //Perform your Actions here.
+                sendMessage()
+            }
+            handled
         }
 
         mSocket.connect()
@@ -125,12 +140,12 @@ class ChatRoomActivity : AppCompatActivity(), View.OnClickListener {
     override fun onClick(p0: View?) {
         when (p0!!.id) {
             R.id.send -> sendMessage()
-            R.id.leave -> onDestroy()
+            R.id.leave -> onBackPressed()
         }
     }
 
-    override fun onDestroy() {
-        super.onDestroy()
+    override fun onBackPressed() {
+        super.onBackPressed()
         val data = initialData(userName, roomName)
         val jsonData = gson.toJson(data)
         mSocket.emit("unsubscribe", jsonData)
