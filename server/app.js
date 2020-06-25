@@ -1,5 +1,6 @@
 const express = require('express');
 const bodyParser = require('body-parser');
+const sk = require('scikit-node')
 
 
 const socketio = require('socket.io')
@@ -83,6 +84,10 @@ io.on('connection',function(socket) {
             messageContent : messageContent,
             roomName : roomName
         }
+        var dfValue = [[1,1,1,1,1,1,1,1,1,1,1,0,0,1,0,0,0,0,0,1,1]]
+        var pkl_filename = "finalized_model.sav"
+
+
         socket.broadcast.to(`${roomName}`).emit('updateChat',JSON.stringify(chatData)) // Need to be parsed into Kotlin object in Kotlin
     })
 
