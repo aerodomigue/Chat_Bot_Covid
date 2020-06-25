@@ -1,6 +1,6 @@
 ### Instalation
 
-[![](Covid_Bot)](https://zupimages.net/up/20/26/fjh3.png)
+![](https://zupimages.net/up/20/26/fjh3.png)
 
 - Démarrer le serveur dans le dossier serveur:
  
