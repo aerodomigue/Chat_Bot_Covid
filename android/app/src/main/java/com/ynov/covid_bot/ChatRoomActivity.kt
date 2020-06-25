@@ -24,6 +24,7 @@ class ChatRoomActivity : AppCompatActivity(), View.OnClickListener {
     lateinit var mSocket: Socket;
     lateinit var userName: String;
     lateinit var roomName: String;
+    lateinit var ip: String;
 
 
     val gson: Gson = Gson()
@@ -45,7 +46,7 @@ class ChatRoomActivity : AppCompatActivity(), View.OnClickListener {
         try {
             userName = intent.getStringExtra("userName")!!
             partnerName.text = userName
-
+            ip = intent.getStringExtra("ip")!!
             roomName = intent.getStringExtra("roomName")!!
         } catch (e: Exception) {
             e.printStackTrace()
@@ -63,7 +64,7 @@ class ChatRoomActivity : AppCompatActivity(), View.OnClickListener {
 
         //Let's connect to our Chat room! :D
         try {
-            mSocket = IO.socket("http://anthonyalcouffe.com:3000")
+            mSocket = IO.socket("http://" + ip + "/")
             Log.d("success", mSocket.id())
 
         } catch (e: Exception) {

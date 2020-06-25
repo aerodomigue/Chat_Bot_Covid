@@ -27,11 +27,14 @@ class EntranceActivity : AppCompatActivity(), View.OnClickListener {
     private fun enterChatroom(){
         val userName = userName.text.toString()
         val roomName = roomname.text.toString()
+        val ip = editTextIP.text.toString()
 
         if(!roomName.isNullOrBlank()&&!userName.isNullOrBlank()) {
             val intentChatRoom = Intent(this, ChatRoomActivity::class.java)
             intentChatRoom.putExtra("userName", userName)
             intentChatRoom.putExtra("roomName", roomName)
+            intentChatRoom.putExtra("ip", ip)
+
             startActivity(intentChatRoom)
 
         }else{
