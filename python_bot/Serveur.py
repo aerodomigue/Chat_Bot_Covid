@@ -1,10 +1,11 @@
-import eventlet
+import model
 import socketio
 import json
 import Dialogue
 
 
 sio = socketio.Client()
+model_bot = model.model()
 communication = Dialogue.Communication()
 
 @sio.event
@@ -12,27 +13,19 @@ def connect():
     print('connect')
 
 @sio.event
-def my_message(sid, data):
-    print('message ', data)
-
-@sio.event
 def disconnect():
     print('disconnect ')
 
 @sio.event()
 def updateChat(data):
-    print('I received a message!')
+    print(data)
     jdata = json.loads(data)
-    print(jdata["messageContent"])
-
-@sio.on('my message')
-def on_message(data):
-    print('I received a message!')
-    communication.
+    if not communication.reset(sio, jdata["messageContent"]):
+        communication.Set_value(sio, jdata["messageContent"])
+        communication.verif_value_ok(sio, model_bot)
 
 @sio.event
 def newUserToChatRoom(data):
-    print('I received a guy!')
     communication.get_dialogue(sio)
 
 sio.connect('http://localhost:3000')

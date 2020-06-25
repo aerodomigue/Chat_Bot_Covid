@@ -63,7 +63,7 @@ class ChatRoomActivity : AppCompatActivity(), View.OnClickListener {
 
         //Let's connect to our Chat room! :D
         try {
-            mSocket = IO.socket("http://192.168.10.28:3000")
+            mSocket = IO.socket("http://anthonyalcouffe.com:3000")
             Log.d("success", mSocket.id())
 
         } catch (e: Exception) {
