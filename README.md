@@ -12,6 +12,6 @@
 
 
     pip install -r requirement.txt
-    python serveur.py
+    python Client_Bot.py
 
 - compiller l'application android ou utiliser la dernière release
